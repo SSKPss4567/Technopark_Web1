@@ -1,0 +1,12 @@
+{% if questions_page.paginator.num_pages > 1 %}
+<div class="pagination">
+        {% if questions_page.has_previous %}
+            <a href="?page={{questions_page.previous_page_number}}" class="page-link">{{ questions_page.previous_page_number }}</a>
+        {% endif %}
+        <a href="#" class="page-link active">{{ questions_page.number }}</a>
+        {% if questions_page.has_next %}
+            <a href="?page={{questions_page.next_page_number}}" class="page-link">{{ questions_page.next_page_number }}</a>
+        {% endif %}
+
+</div>
+{% endif %}
