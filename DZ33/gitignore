@@ -1,0 +1,12 @@
+# ---- Environment ----
+.env
+.env.*
+
+# ---- VENV ----
+venv/
+.venv/
+
+# ---- Python ----
+__pycache__/
+
+
