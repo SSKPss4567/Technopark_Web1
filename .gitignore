@@ -1,10 +1,10 @@
 # ---- Environment ----
-.env
-.env.*
+DZ33/.env
+DZ33/.env.*
 
 # ---- VENV ----
-venv/
-.venv/
+DZ33/venv/
+DZ33/.venv/
 
 # ---- Python ----
 __pycache__/
