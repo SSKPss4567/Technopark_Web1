@@ -1,0 +1,60 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "q-and-a"
+version = "0.3.0"
+description = "Django project for Technopark"
+authors = [
+    {name = "Your Name", email = "your.email@example.com"},
+]
+dependencies = [
+    "Django>=4.2,<5.0",
+    "python-decouple>=3.8",
+    "whitenoise>=6.0",
+    "django-bootstrap5>=23.0",
+    "psycopg2-binary>=2.9",
+    "Pillow>=10.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "django-debug-toolbar>=4.0",
+    "django-extensions>=3.2",
+    "ipython>=8.0",
+    "black>=23.0",
+    "flake8>=6.0",
+    "pytest-django>=4.5",
+]
+
+production = [
+    "gunicorn>=20.0",
+    "psycopg2-binary>=2.9",
+]
+
+[tool.setuptools.packages.find]
+where = ["."]  
+include = ["project*", "questions*", "core*"]  
+exclude = ["media*", "static*", "tests*", "venv*", ".venv*"]  
+
+
+[tool.black]
+line-length = 88
+target-version = ['py38']
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  | \.git
+  | \.venv
+  | build
+  | dist
+  | migrations
+)/
+'''
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+line_length = 88
+

@@ -1,12 +1,5 @@
-# ---- Environment ----
-DZ33/.env
-DZ33/.env.*
-
-# ---- VENV ----
-DZ33/venv/
-DZ33/.venv/
-
-# ---- Python ----
+/venv/
 __pycache__/
-
-
+/media/
+.env
+*.egg-info/
