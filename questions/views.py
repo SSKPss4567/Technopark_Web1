@@ -98,7 +98,7 @@ def GetMembersTags(context, request=None):
         popular_tags += question.tag_names
         best_members.append(question.nickname)
 
-    is_authenticated = True
+    is_authenticated = True 
 
     user_data = [
         {"Login": "dr_pepper", "Email": "dr.pepper@mail.ru", "NickName": "Dr. Pepper"}

@@ -16,13 +16,16 @@
                         <img src="{% static 'questions/img/free-icon-font-comments-5074600.png' %}" alt="Комментарии">
                         <span class="comment-count">{{ q.answer_count }}</span>
                     </div>
-                </a>
+                </a>    
+
                 <div class="like-container">
                     <button class="heart-button">
                         <img src="{% static 'questions/img/free-icon-font-heart-3916585.png' %}" alt="Лайк">
                     </button>
                     <span class="like-count">{{q.like_count}}</span>
                 </div>
+
+
                 <div class="tag-list">
                 {% for t in q.tags.all %} 
                     <a href="{% url 'tag' t %}" class="tag">{{t}}</a>

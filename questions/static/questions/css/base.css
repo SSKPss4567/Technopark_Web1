@@ -9,8 +9,6 @@ body {
   padding: 0;
 }
 
-
-
 /* main */
 
 .main{
@@ -43,7 +41,7 @@ body {
     align-items: center;
     justify-content: space-between; 
     width: 100%;
-    padding: 3.5% 5%;  
+    padding: 3% 5%;  
     padding-bottom: 2%; 
     height: 90px;     
     position: fixed;        
@@ -102,11 +100,16 @@ body {
     top: 50%;
     transform: translateY(-50%);
     background: none;
-    border: none;
+    border: none;   
     cursor: pointer;
     padding: 4px;
-   
+    /* transition: transform 0.15s ease;   */
 }
+
+/* .search-button:active {
+    transform: translateY(-50%) scale(0.5); 
+} */
+
 
 .search-box:focus {
   background-color: white !important;
@@ -131,7 +134,7 @@ body {
 .auth-section{
     flex: 0 0 auto;
     display: flex;
-    gap: 1em;
+    gap: 0.5em;
     align-items: center;
     margin-right: 20px;
     margin-left: 115px;
@@ -142,9 +145,14 @@ body {
     gap:15px;
 }
 
+.ask-button{
+    margin-right: 1.5em;
+}
+
 .avatar{
     width: 40px;
     height: 40px;
+
 }
 
 .auth-links {
@@ -157,6 +165,7 @@ body {
 .auth-links:hover{
     color: black;
 }
+
 
 
 
@@ -214,3 +223,178 @@ body {
 }
 
 
+.mobile-search-button {
+    display: none;  
+}
+
+.mobile-search-overlay {
+    display: none; 
+}
+
+.ask-question-btn{
+    display: none;    
+}
+
+.auth-details{
+    margin-left: 5px;
+}
+
+
+/* mobile.css */
+@media (max-width: 850px) {
+    /* Принудительное переопределение */
+    .main{
+        padding: 10px;
+        padding-top: 90px;
+        display: grid;
+        grid-template-columns: 1fr;
+        
+    }   
+
+    .nav-bar {
+        padding: 1rem;
+        height: auto;
+        flex-wrap: nowrap;
+        gap: 0.5rem;
+        justify-content: space-between; 
+        
+    }
+    
+    .icon{
+        width: 2em;
+        height: 2em;
+
+    }
+    .name{
+        font-size: 20px;
+    }
+
+    .search-container {
+        display: none; 
+    }
+    
+    .mobile-search-button {
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 4px;
+        color: #81848f;
+        display: block; 
+    }
+
+    .search-icon{
+        width: 20px;
+        transition: color 0.2s;
+        color: #abadb4;
+    }
+
+    
+    .auth-section {
+        order: 2 !important;
+        margin: 0 !important;
+        justify-content: center !important;
+
+    }
+
+    .ask-button{
+        display: none;
+    }
+
+    .avatar{
+        width: 40px;
+        height: 40px;
+    }
+
+    .auth-details{
+        display: none;    
+    }
+    
+    .aside {
+        display: none;
+    }
+
+
+    /* поисковик контейнер */
+
+      .mobile-search-container {
+        position: absolute; 
+        top: 15%; 
+        left: 5vw;
+        right: 5vw; 
+        width: auto; 
+        display: none;
+        z-index: 1000;
+        background: #F0F2F5; 
+        padding: 10px 0; 
+    }
+
+    .search-box {
+        width: 100%;
+        padding: 5px 60px 5px 20px;
+        font-size: 16px;
+        border: 1px solid #e6e6e6;
+        border-radius: 8px;
+        outline: none;
+        background-color: #e6e8ec;
+        transition: border-color 0.2s;
+        transition: background-color 0.2s;
+        flex: 0 0 auto;
+    }
+
+    .mobile-search-container:has(.search-box:hover) .search-box,
+    .mobile-search-container:has(.mobile-search-expand-button:hover) .search-box {
+        background-color: #e1e3e8;
+        border-color: #c5c7cd;
+    }
+    .mobile-search-expand-button {
+        position: absolute;
+        right: 8px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 4px;
+    
+    }
+
+    .search-box:focus {
+        background-color: white !important;
+        border-color: black !important;
+    }
+
+    .mobile-search-icon-expand{
+        width: 20px;
+        transition: color 0.2s;
+        color: #abadb4;
+    }
+
+    .mobile-search-container:has(.search-box:hover) .mobile-search-icon-expand,
+    .mobile-search-container:has(.mobile-search-expand-button:hover) .mobile-search-icon-expand {
+        color: #81848f;
+    }
+
+    .search-box:focus + .mobile-search-expand-button .mobile-search-icon-expand {
+        color: #000; 
+    }
+
+    .ask-question-btn {
+   
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        margin-left: 12px;
+        margin-right: 0.4em;
+    }
+
+    .ask-question-btn:active {
+        transform: scale(0.9);
+        transition: transform 0.1s ease;
+    }
+    
+    .ask-question-icon {
+        fill: #81848f;
+        width: 24px;
+        height: 24px;
+    }
+}
