@@ -316,16 +316,18 @@ body {
 
     /* поисковик контейнер */
 
-      .mobile-search-container {
-        position: absolute; 
-        top: 15%; 
-        left: 5vw;
-        right: 5vw; 
-        width: auto; 
+    .mobile-search-container {
+        position: fixed;      
+        top: 0;
+        left: 0;
+        right: 0;
+        width: 100vw;         
+        height: 100vh;       
         display: none;
         z-index: 1000;
-        background: #F0F2F5; 
-        padding: 10px 0; 
+
+        background: rgba(240, 242, 245, 0.97); 
+        padding: 70px 5vw 10px; 
     }
 
     .search-box {
