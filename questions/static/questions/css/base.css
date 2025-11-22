@@ -257,9 +257,11 @@ body {
         flex-wrap: nowrap;
         gap: 0.5rem;
         justify-content: space-between; 
+        height: 70px !important;
         
     }
-    
+
+
     .icon{
         width: 2em;
         height: 2em;
@@ -317,17 +319,15 @@ body {
     /* поисковик контейнер */
 
     .mobile-search-container {
-        position: fixed;      
-        top: 0;
-        left: 0;
-        right: 0;
-        width: 100vw;         
-        height: 100vh;       
+        position: absolute; 
+        top: 10%; 
+        left: 5vw;
+        right: 5vw; 
+        width: auto; 
         display: none;
         z-index: 1000;
-
-        background: rgba(240, 242, 245, 0.97); 
-        padding: 70px 5vw 10px; 
+        background: #F0F2F5; 
+        padding: 10px 0; 
     }
 
     .search-box {
