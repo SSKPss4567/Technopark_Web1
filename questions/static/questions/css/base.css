@@ -41,9 +41,9 @@ body {
     align-items: center;
     justify-content: space-between; 
     width: 100%;
-    padding: 3% 5%;  
-    padding-bottom: 2%; 
-    height: 90px;     
+    padding: 2% 5%;  
+    padding-top: 1%;
+    padding-bottom: 0.75%;   
     position: fixed;        
     background-color: #F0F2F5;
  

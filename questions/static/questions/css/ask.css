@@ -46,17 +46,23 @@
 
 .question-root-input{
     width: 100%;
-    border: none;
+    border-top: 16px solid #fff;
+    border-bottom: 16px solid #fff;
+    border-left: none;
+    border-right: none;
+
     font-size: 16px;
     transition: all 0.2s ease;
     resize: none !important;
     overflow: hidden;
-    padding: 16px;
+    padding: 0 16px;
+    outline-style: none;
 }
 
 .question-root-input:focus {
-  outline: none; 
-  border: none;  
+
+    border-top: 16px solid #fff;
+    border-bottom: 16px solid #fff;
 }
 
 
