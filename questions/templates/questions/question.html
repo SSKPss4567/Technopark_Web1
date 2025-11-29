@@ -10,7 +10,7 @@
         <div class="question-global">
             <div class="question-root">
                 <div class="question-header">
-                    <img class="question-avatar" src="{% static 'questions/img/reviewsphoto.png' %}">
+                    <img class="question-avatar" src="{{question.user_id.userprofile.avatar_url}}">
                     <h4 class="question-question">{{question.title}}</h4>
                 </div>
                 <div>
@@ -48,11 +48,11 @@
 
                 {% for a in questions_page %} 
                 <div class="question-commentory-container">
-                    <img class="avatar" src="{% static 'questions/img/reviewsphoto.png' %}">   
+                    <img class="avatar" src="{{ a.user_id.userprofile.avatar_url }}">   
                     <div class="question-comment">
                         <p style="margin: 4px;">{{ a.text }}</p>
                         <div class="question-footer">
-                    
+                            
                             <div class="like-container small">
                                 <button class="heart-button">
                                     <img src="{% static 'questions/img/free-icon-font-heart-3916585.png' %}" alt="Лайк">

@@ -1,7 +1,7 @@
 from django.db import models
 from django.db.models import UniqueConstraint
 from django.contrib.postgres.aggregates import ArrayAgg
-
+from django.templatetags.static import static
 
 class QuestionManager(models.Manager):
     def new_questions(self):
@@ -37,7 +37,7 @@ class Question(models.Model):
         ordering = ["-created_at"]
 
     title = models.CharField(verbose_name="Заголовок", max_length=256)
-    text = models.TextField(verbose_name="Текст")
+    text = models.TextField(verbose_name="Текст", blank=True)
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Создано в")
     user_id = models.ForeignKey(
         "auth.User", on_delete=models.SET_NULL, verbose_name="Пользователь", null=True
@@ -105,8 +105,14 @@ class UserProfile(models.Model):
     user = models.OneToOneField(
         "auth.User", on_delete=models.CASCADE, verbose_name="Пользователь"
     )
-    avatar = models.ImageField(verbose_name="Аватарка")
+    avatar = models.ImageField(verbose_name="Аватарка",null=True,blank=True,)
     nickname = models.CharField(max_length=64, verbose_name="Ник")
+
+    @property
+    def avatar_url(self):
+        if self.avatar and self.avatar.file:
+            return self.avatar.url
+        return static('questions/img/reviewsphoto.png')
 
     def __str__(self):
         return self.user.username

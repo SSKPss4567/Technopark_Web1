@@ -9,47 +9,56 @@
     <section class="questions">
         <div class="question-global">
             <h4 class="signup-title">Registration</h4>
-            <div class="signup-list">
-                <label class="avatar-wrapper">
+            <form action="" method="post" class="signup-list">
+                {% csrf_token %}
+                
+                {% include "questions/blocks/form_errors.html" with form=form %}
+
+                {% comment %} <label class="avatar-wrapper">
                     <img
                         class="setting-avatar"
                         src="{% static 'questions/img/reviewsphoto.png' %}"
                         alt="Ваш аватар"
                     />
                     <input id="photo" type="file" accept="image/*" class="avatar-input" />
-                </label>   
+                </label>    {% endcomment %}
 
                 <div class="signup-input-container">
-                    <label class="signup-label" for="login">Логин</label>
-                    <input class="signup-input" type="text" id="login" placeholder="Введите ваш логин" required>
+                    <label class="signup-label" for="username">Логин</label>
+                    <input class="signup-input {% if form.username.errors %}is-invalid{% endif %}" name="username" type="text" id="username" placeholder="Введите ваш логин" value="{{ form.username.value|default_if_none:'' }}" >
+                    {% include "questions/blocks/form_field_errors.html" with field=form.username %}
                 </div>
 
                 <div class="signup-input-container">
                     <label class="signup-label" for="email">Email</label>
-                    <input class="signup-input" type="email" id="email" placeholder="Введите ваш email" required>
-                    <span class="error">Sorry, this email address already registred!</span>                   
+                    <input class="signup-input {% if form.email.errors %}is-invalid{% endif %}" name="email" type="email" id="email" placeholder="Введите ваш email" value="{{ form.email.value|default_if_none:'' }}" >
+                    {% include "questions/blocks/form_field_errors.html" with field=form.email %}                 
                 </div>
 
                 <div class="signup-input-container">
                     <label class="signup-label" for="nickname">Nickname</label>
-                    <input class="signup-input" type="text" id="nickname" placeholder="Введите ваш ник" required>
+                    <input class="signup-input {% if form.nickname.errors %}is-invalid{% endif %}" name="nickname" type="text" id="nickname" placeholder="Введите ваш ник" value="{{ form.nickname.value|default_if_none:'' }}" >
+                    {% include "questions/blocks/form_field_errors.html" with field=form.nickname %}
                 </div>
 
                 <div class="signup-input-container">
-                    <label class="signup-label" for="password">Пароль</label>
-                    <input class="signup-input" type="password" id="password" placeholder="Введите пароль" required minlength="6">
+                    <label class="signup-label" for="password1">Пароль</label>
+                    <input class="signup-input {% if form.password1.errors %}is-invalid{% endif %}" name="password1" type="password" id="password1" placeholder="Введите пароль" value="{{ form.password1.value|default_if_none:'' }}" >
+                    {% include "questions/blocks/form_field_errors.html" with field=form.password1 %}
                 </div>
 
                 <div class="signup-input-container">
-                    <label class="signup-label" for="confirm-password">Повторите пароль</label>
-                    <input class="signup-input" type="password" id="confirm-password" placeholder="Повторите пароль" required minlength="6">
+                    <label class="signup-label" for="password2">Повторите пароль</label>
+                    <input class="signup-input {% if form.password2.errors %}is-invalid{% endif %}" name="password2" type="password" id="password2" placeholder="Повторите пароль" value="{{ form.password2.value|default_if_none:'' }}" >
+                    {% include "questions/blocks/form_field_errors.html" with field=form.password2 %}
                 </div>
+
                 <div class="setting-save">
-                    <button type="button" class="btn btn-primary">Сохранить</button>
+                    <button type="submit" class="btn btn-primary">Сохранить</button>
                     <!-- <a class="tag" href="#">Создать новый аккаунт</a> -->
                 </div>
 
-            </div>
+            </form>
         </div>
     </section>
 {% endblock %} 

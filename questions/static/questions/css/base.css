@@ -46,7 +46,7 @@ body {
     padding-bottom: 0.75%;   
     position: fixed;        
     background-color: #F0F2F5;
- 
+    height: 74px !important;
     
 }
 
@@ -152,7 +152,9 @@ body {
 .avatar{
     width: 40px;
     height: 40px;
-
+    border-radius: 50%; 
+    object-fit: cover;  
+    
 }
 
 .auth-links {

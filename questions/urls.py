@@ -5,9 +5,10 @@ from questions.views import (
     settings,
     tag,
     ask,
-    login,
+    login_view,
     signup,
     user,
+    logout_view
 )
 from . import views
 
@@ -18,6 +19,7 @@ urlpatterns = [
     path("tag/<str:tag_name>/", tag, name="tag"),
     path("user/<str:user_nickname>/", user, name="user"),
     path("ask/", ask, name="ask"),
-    path("login/", login, name="login"),
+    path("login/", login_view, name="login"),
+    path("logout/", logout_view, name="logout"),
     path("signup/", signup, name="signup"),
 ]

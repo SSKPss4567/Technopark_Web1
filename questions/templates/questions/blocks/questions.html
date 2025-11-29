@@ -4,7 +4,7 @@
         {% for q in questions_page %}
         <div class="question-root">
             <div class="question-header">
-                <img class="avatar" src="{% static 'questions/img/reviewsphoto.png' %}">
+                <img class="avatar" src="{{ q.user_id.userprofile.avatar_url }}">
                 <a class="question-question" href="{% url 'question' q.id %}">{{ q.title }}</a>
             </div>
             <div>

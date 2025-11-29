@@ -1,4 +1,5 @@
 from django.core.management.base import BaseCommand
+from django.contrib.auth.hashers import make_password
 from questions.models import (
     Question,
     Answer,
@@ -7,7 +8,7 @@ from questions.models import (
     QuestionLike,
     AnswerLike,
 )
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User 
 from django.db import transaction
 from django.db.models import Count
 import random
@@ -43,7 +44,11 @@ class Command(BaseCommand):
         # USERS
         self.stdout.write("Creating users...")
         users = [
-            User(username=f"user{i}", email=f"user{i}@mail.ru")
+            User(
+                username=f"user{i}", 
+                password=make_password(f"user{i}"), 
+                email=f"user{i}@mail.ru"
+            )
             for i in range(num_users)
         ]
 

@@ -10,23 +10,32 @@
     <section class="questions">
         <div class="question-global">
             <h4 class="login-title">Log in</h4>
-            <div class="login-list">
-                
+
+            <form action="" method="post"  class="login-list">
+                {% csrf_token %}
+
+                {% include "questions/blocks/form_errors.html" with form=form %}
+
                 <div class="login-input-container">
-                    <label class="login-label" for="login">Логин</label>
-                    <input class="login-input" type="text" id="login" placeholder="Введите ваш логин">
+                    <label class="login-label" for="username">Логин</label>
+                    <input class="login-input {% if form.username.errors %}is-invalid{% endif %}" name="username"  type="text" id="username" placeholder="Введите ваш логин">
+                    {% include "questions/blocks/form_field_errors.html" with field=form.username %}
                 </div> 
+
+
                 <div class="login-input-container">
                     <label class="login-label" for="password">Пароль</label>
-                    <input class="login-input" type="password" id="password" placeholder="Введите ваш пароль">
-                    <span class="error">Sorry, wrong password!</span>
+                    <input class="login-input {% if form.username.errors %}is-invalid{% endif %}" name="password"  type="password" id="password" placeholder="Введите ваш пароль">
+                    {% include "questions/blocks/form_field_errors.html" with field=form.password %}
                 </div> 
+
+
                 <div class="setting-save">
-                    <button type="button" class="btn btn-primary">Log in</button>
+                    <button type="submit" class="btn btn-primary">Log in</button>
                     <a class="tag" href="{% url 'signup' %}">Создать новый аккаунт</a>
                 </div>
 
-            </div>
+            </form>
         </div>
     </section>
 {% endblock %}

@@ -69,17 +69,17 @@
                 </svg>
             </a>
             
-            {% if is_authenticated %}
+            {% if user.is_authenticated %}
 
                 <a class="" href="{% url 'settings' %}">
-                    <img class="avatar" src="{% static 'questions/img/reviewsphoto.png' %}">
+                    <img class="avatar" src="{{ user.userprofile.avatar_url }}">
                 </a>
                 
                 <div class="auth-details">
-                    <h6>{{user_data.0.NickName}}</h6>
+                    <h6>{{ user.userprofile.nickname }}</h6>
                     <div class="auth-setting">
                         <a class="auth-links" href="{% url 'settings' %}">settings</a>
-                        <a class="auth-links" href="#">log out</a>
+                        <a class="auth-links" href="{% url 'logout' %}">log out</a>
                     </div>
                 </div>
             {% else %}

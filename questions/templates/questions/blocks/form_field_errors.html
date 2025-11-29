@@ -1,0 +1,7 @@
+{% if field.errors %}
+<div class="invalid-feedback">
+        {% for error in field.errors%}
+            <p class="mb-1">{{ error }}</p>
+        {% endfor %}
+</div>
+{% endif %}

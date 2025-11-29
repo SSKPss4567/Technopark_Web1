@@ -8,33 +8,67 @@
 {% block content %}
     <section class="questions">
         <div class="question-global">
-            <h4 class="setting-title">Settings: {{user_data.0.NickName}}</h4>
-            <div class="inputs-list">
-                <label class="avatar-wrapper">
+            <h4 class="setting-title">Settings: {{ user.userprofile.nickname }}</h4>
+            <form action="" method="post" enctype="multipart/form-data" class="inputs-list">
+                {% csrf_token %}    
+                
+                {% include "questions/blocks/form_errors.html" with form=form %}
+                
+                <label class="avatar-wrapper" for="avatar">
                     <img
                         class="setting-avatar"
-                        src="{% static 'questions/img/reviewsphoto.png' %}"
+                        src="{{ request.user.userprofile.avatar_url }}"
                         alt="Ваш аватар"
                     />
-                    <input type="file" accept="image/*" class="avatar-input" />
+                    <input type="file" id="avatar" name="avatar" accept="image/*" class="avatar-input {% if form.username.errors %}is-invalid{% endif %}" />
                 </label>   
+                {% include "questions/blocks/form_field_errors.html" with field=form.username %}
+
 
                 <div class="setting-input-container">
-                    <label class="setting-label" for="login">Login</label>
-                    <input class="setting-input" type="text" id="login" placeholder="Введите ваш логин" value="{{user_data.0.Login}}">
+                    <label class="setting-label" for="username">Login</label>
+                    <input class="setting-input {% if form.username.errors %}is-invalid{% endif %}" type="text" name="username" id="username" placeholder="Введите ваш логин" value="{{ form.username.value|default_if_none:'' }}">
+                    {% include "questions/blocks/form_field_errors.html" with field=form.username %}
                 </div> 
+
                 <div class="setting-input-container">
                     <label class="setting-label" for="email">Email</label>
-                    <input class="setting-input" type="text" id="email" placeholder="Введите ваш email" value="{{user_data.0.Email}}">
+                    <input class="setting-input {% if form.email.errors %}is-invalid{% endif %}" name="email" type="email" id="email" placeholder="Введите ваш email" value="{{ form.email.value|default_if_none:'' }}" >
+                    {% include "questions/blocks/form_field_errors.html" with field=form.email %}                 
                 </div> 
+
                 <div class="setting-input-container">
-                    <label class="setting-label" for="nickname">NickName</label>
-                    <input class="setting-input" type="text" id="nickname" placeholder="Введите ваш ник" value="{{user_data.0.NickName}}">
+                    <label class="setting-label" for="nickname">Nickname</label>
+                    <input class="setting-input {% if form.nickname.errors %}is-invalid{% endif %}" name="nickname" type="text" id="nickname" placeholder="Введите ваш ник" value="{{ form.nickname.value|default_if_none:'' }}" >
+                    {% include "questions/blocks/form_field_errors.html" with field=form.nickname %}
                 </div> 
+
                 <div class="setting-save">
-                    <button type="button" class="btn btn-primary">Сохранить</button>
+                    <button type="submit" class="btn btn-primary">Сохранить</button>
                 </div>
-            </div>
+            </form>
         </div>
     </section>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const fileInput = document.getElementById("avatar");
+    const avatarImg = document.querySelector(".setting-avatar");
+
+    fileInput.addEventListener("change", function (event) {
+        const file = event.target.files[0];
+
+        if (file) {
+            const reader = new FileReader();
+
+            reader.onload = function (e) {
+                avatarImg.src = e.target.result;  // обновляем картинку
+            };
+
+            reader.readAsDataURL(file);  // читаем файл как DataURL
+        }
+    });
+});
+</script>   
 {% endblock %}

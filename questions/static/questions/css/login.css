@@ -63,6 +63,10 @@
     color:#ed330a;
 }
 
+ul {
+    list-style-type: none;
+    padding-left: 0;
+}
 
 /* mobile.css */
 @media (max-width: 850px) {

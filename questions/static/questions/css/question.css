@@ -20,8 +20,10 @@
 }
 
 .question-avatar{
-    width: 52px;
-    height: 52px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%; 
+    object-fit: cover;  
 }
 
 .question-header{

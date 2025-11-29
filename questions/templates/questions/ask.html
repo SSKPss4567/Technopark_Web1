@@ -7,43 +7,61 @@
 {% endblock %}
 
 {% block content %}
-    <section class="question"> 
+    <form action="" method="post" class="question"> 
+        {% csrf_token %}
+
+        {% include "questions/blocks/form_errors.html" with form=form %}
+       
         <div class="question-title">
             <h4 class="title">New question</h4>   
         </div>
         <div class="question-content">
-            
+            <div class="question-title-field">
+                <textarea 
+                    class="question-title-input {% if form.title.errors %}is-invalid{% endif %}" 
+                    placeholder="Ваш цепляющий заголовок"
+                    rows="1"
+                    name="title"
+                >{{ form.title.value|default_if_none:'' }}</textarea>     
+                {% include "questions/blocks/form_field_errors.html" with field=form.title %}
+            </div>
             <textarea 
-                class="question-title-input" 
-                placeholder="Ваш цепляющий заголовок"
-                rows="1"
-            ></textarea>     
-            
-            <textarea 
-                class="question-root-input" 
+                class="question-root-input " 
                 placeholder="Что вы хотите рассказать или спросить?"
                 rows="12"
-            ></textarea>     
+                name="text"
+            >{{ form.text.value|default_if_none:'' }}</textarea>     
             
         </div>
 
         <div class="question-tag-container">
             <textarea 
-                class="question-tag-input" 
+                class="question-tag-input {% if form.tags.errors %}is-invalid{% endif %}" 
                 placeholder="Ваши чудесные теги"
                 rows="1"
-            ></textarea> 
+                name="tags"
+            >{{ form.tags.value|default_if_none:'' }}</textarea> 
+            {% include "questions/blocks/form_field_errors.html" with field=form.tags %}
         </div>
         <div class="write-button">
-            <button type="button" class=" btn btn-primary ">Спросить</button>
+            <button id="ask-btn" type="submit" class=" btn btn-primary ">Спросить</button>
         </div>
         
-    </section>
+    </form>
 
    <script>  
         document.addEventListener('DOMContentLoaded', () => {
             const titleInput = document.querySelector('.question-title-input');
             const rootInput = document.querySelector('.question-root-input');
+            const askBtn = document.getElementById('ask-btn');
+
+            
+            function validate() {
+                const titleFilled = titleInput.value.trim().length > 0;
+                const rootFilled = rootInput.value.trim().length > 0;
+
+                askBtn.disabled = !(titleFilled || rootFilled);
+            }
 
             titleInput.addEventListener('keydown', (e) => {
             if (e.key === 'Enter') {
@@ -51,6 +69,12 @@
                 rootInput.focus();  
             }
             });
+
+            titleInput.addEventListener('input', validate);
+            rootInput.addEventListener('input', validate);
+
+            validate();
+
         });
     </script>
 {% endblock %}
