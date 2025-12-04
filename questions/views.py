@@ -18,6 +18,26 @@ def index(request, *args, **kwarags):
     GetMembersTags(context)
     return render(request, "questions/index.html", context)
 
+class AnswerForm(forms.ModelForm):
+    def __init__(self, *args, user=None, question=None, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.user = user
+        self.question = question
+
+    class Meta:
+        model = Answer
+        fields = ['text']
+    
+    def save(self, commit=True):
+        answer = super().save(commit=False)
+        if self.user:
+            answer.user_id = self.user
+        if self.question:
+            answer.question_id = self.question
+        if commit:
+            answer.save()
+            self.question.inc_answers()
+        return answer
 
 def question(request, *args, **kwarags):
     question = Question.objects.get(id=kwarags.get("id"))
@@ -26,6 +46,20 @@ def question(request, *args, **kwarags):
     context = {"question": question}
     context["questions_page"] = paginate(answers, request, 5)
     GetMembersTags(context)
+
+    form = AnswerForm(user=request.user, question=question)
+
+    if request.method == 'POST':  
+        if not request.user.is_authenticated:
+            return redirect('login')  # или reverse('login')
+
+        form = AnswerForm(request.POST,request.FILES, user=request.user, question=question)
+        if form.is_valid():
+            answer = form.save()
+            return redirect(f"{reverse('question', kwargs={'id': question.id})}#answer_{answer.id}")
+
+    context["form"]=form
+
     return render(request, "questions/question.html", context)
 
 
@@ -220,7 +254,7 @@ def login_view(request, *args, **kwargs):
 
 def logout_view(request, *args, **kwarags):
     logout(request)
-    return redirect(reverse('index'))
+    return redirect(request.META.get('HTTP_REFERER', '/'))
 
 
 

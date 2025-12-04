@@ -11,10 +11,10 @@
             <div class="question-root">
                 <div class="question-header">
                     <img class="question-avatar" src="{{question.user_id.userprofile.avatar_url}}">
-                    <h4 class="question-question">{{question.title}}</h4>
+                    <h4 style="white-space: pre-wrap;" class="question-question">{{question.title}}</h4>
                 </div>
                 <div>
-                    <p class="question-text">{{question.text}}</p>
+                    <p style="white-space: pre-wrap;" class="question-text">{{question.text}}</p>
                 </div>
                 <div class="question-footer">
                     
@@ -35,22 +35,26 @@
 
             <div class="question-commentory-list">
                 
-                <div class="your-comment-container">
+                <form action="" method="post" class="your-comment-container">
+                    {% csrf_token %}
+                   
                     <textarea 
-                        class="your-comment-input" 
+                        class="your-comment-input {% if form.title.errors %}is-invalid{% endif %}" 
                         placeholder="Написать комментарий"
                         rows="1"
-                    ></textarea>
-                        <button class="submit-button inside-button">
+                        name="text"
+                        id="anw_button"
+                    >{{ form.text.value|default_if_none:'' }}</textarea>
+                    <button type="submit" class="submit-button inside-button">
                         <img src="{% static 'questions/img/free-icon-font-arrow-circle-up-6407327.png' %}" />
                     </button>
-                </div>
-
+                </form>
+                
                 {% for a in questions_page %} 
-                <div class="question-commentory-container">
+                <div id="answer_{{ a.id }}" class="question-commentory-container">
                     <img class="avatar" src="{{ a.user_id.userprofile.avatar_url }}">   
                     <div class="question-comment">
-                        <p style="margin: 4px;">{{ a.text }}</p>
+                        <p style="white-space: pre-wrap; margin: 4px;">{{ a.text }}</p>
                         <div class="question-footer">
                             
                             <div class="like-container small">
@@ -87,5 +91,6 @@
         this.style.height = 'auto'; 
         this.style.height = this.scrollHeight + 'px'; 
     });
+    
     </script>
 {% endblock %}

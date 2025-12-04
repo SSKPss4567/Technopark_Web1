@@ -8,7 +8,7 @@
                 <a class="question-question" href="{% url 'question' q.id %}">{{ q.title }}</a>
             </div>
             <div>
-                <p>{{ q.text }}</p>
+                <p style="white-space: pre-wrap;">{{ q.text }}</p>
             </div>
             <div class="question-footer">
                 <a class="comment-link" href="{% url 'question' q.id %}">

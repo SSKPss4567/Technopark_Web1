@@ -56,6 +56,11 @@ class Question(models.Model):
     def __str__(self):
         return f"Question #{self.id} "
 
+    def inc_answers(self):
+        from django.db.models import F
+        Question.objects.filter(id=self.id).update(answer_count=F('answer_count') + 1)
+        self.refresh_from_db(fields=['answer_count'])
+
 
 class AnswerManager(models.Manager):
     def old_answers(self):
